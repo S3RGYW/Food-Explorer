@@ -1,0 +1,29 @@
+import { useCart } from "../../hooks/cart";
+
+import { Container, Content } from "./styles";
+
+export function OrderItem({ data }) {
+  const { handleRemoveDishFromCart, paymentAccept } = useCart();
+
+  return (
+    <Container>
+      <div>
+        <img src={data.image} alt="imagem do prato" />
+      </div>
+      <Content>
+        <div>
+          <span>{data.quantity}X</span>
+          <span>{data.title}</span>
+          <strong>R$ {data.price}</strong>
+        </div>
+        <button
+          type="button"
+          onClick={() => handleRemoveDishFromCart(data.id)}
+          disabled={paymentAccept}
+        >
+          Excluir
+        </button>
+      </Content>
+    </Container>
+  );
+}
